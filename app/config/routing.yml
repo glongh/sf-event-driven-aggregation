@@ -1,0 +1,5 @@
+app_g1:
+    resource: "@AppG1Bundle/Controller/"
+    type:     annotation
+    prefix:   /
+
