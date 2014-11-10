@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="http://getbootstrap.com/examples/jumbotron/jumbotron.css">
+{% endblock %}
+{% block body %}
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('home') }}">Creative Board</a>
+            </div>
+
+        </div>
+    </nav>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>{{ artwork.name }}</h1>
+            <p>{{ artwork.description }}</p>
+            <p>Views: {{ artwork.views }}</p>
+            {% set upVotes =  artwork.upVotes | default(0) %}
+            {% set dwnVotes = artwork.dwnVotes | default(0) %}
+            {% set rating = upVotes - dwnVotes %}
+            <p>Rating: {% if rating < 0 %} 0 {% else %} {{ rating }} {% endif %} / {{ upVotes + dwnVotes }}</p>
+            <p>
+                <a class="btn btn-success btn-lg" href="{{ path('show_upvote', {'id': artwork.id}) }}" role="button">Like</a>
+                <a class="btn btn-danger btn-lg" href="{{ path('show_dwnvote', {'id': artwork.id}) }}" role="button">DisLike</a>
+            </p>
+        </div>
+    </div>
+
+{% endblock %}
